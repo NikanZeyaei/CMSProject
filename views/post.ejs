@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <%- include('partials/includes-top') %>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card mb-3">
+        <img src="<%= post.url %> " class="card-img-top" alt="..." />
+        <div class="card-body">
+          <h1 class="display-1 text-center mb-3"><%= post.title %></h1>
+          <p class="card-text"><%= post.content %></p>
+          <p class="card-text">
+            <small class="text-muted"><%= post.date %> </small>
+          </p>
+          <div>
+            <div class="text-start">
+              <a href="/" class="btn btn-warning">Go back</a>
+            </div>
+            <div class="text-end">
+                <a href="<%= post.id %>/edit" class="btn btn-info">Edit</a>
+              <form action="/posts/<%= post.id %>?_method=DELETE" method="post" class="d-inline">
+                <button type="submit" class="btn btn-danger">Delete</a>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%- include('partials/includes-bottom') %>
+  </body>
+</html>

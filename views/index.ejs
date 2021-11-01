@@ -11,20 +11,27 @@
     <div class="container">
       <div class="text-center">
         <h1 class="mb-2">Posts</h1>
-        <a href="/panel/new" class="btn btn-success mb-2">New Post</a>
+        <a href="/panel/new" class="btn btn-success mb-2 btn-lg">New Post</a>
+      </div>
+      <div class="text-center text-danger mt-5">
+        <% if (!posts.length) { %>
+          <h1>There are no posts yet!</h1>
+         <% } %>
       </div>
       <% posts.forEach((post) => { %> 
       <div class="card mt-5 border border-info">
-        <img class="card-img-top" src="https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510_960_720.jpg" alt="Card image cap" height="450">
+        <img class="card-img-top" src="<%= post.url %> " alt="Card image cap" height="450">
         <div class="card-body">
           <div class="text-center">
             <a href = "/posts/<%= post.id %> " class="card-title link-primary h3"><%= post.title %></a>
           </div>
-          <p class="card-text"><%= post.description %> </p>
-          <p class="card-text"><small class="text-muted"><%= post.date %></small></p>
+          <p class="card-text mt-3"><%= post.description %> </p>
+          <p class="card-text mb-0"><small class="text-muted"><%= post.date %></small></p>
           <div class="text-end">
-            <a href="posts/<%= post.id %>/edit" class="btn btn-info">Edit</a>
-            <a href="posts/<%= post.id %>/delete" class="btn btn-danger">Delete</a>
+            <a href="/posts/<%= post.id %>/edit" class="btn btn-info">Edit</a>
+            <form action="/posts/<%= post.id %>?_method=DELETE" method="post" class="d-inline">
+              <button type="submit" class="btn btn-danger">Delete</a>
+            </form>
           </div>
       </div>
     </div>
