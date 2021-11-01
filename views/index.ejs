@@ -5,6 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CMS</title>
+    <%- include('partials/includes-top') %>
   </head>
-  <body></body>
+  <body>
+    <div class="container">
+      <div class="text-center">
+        <h1 class="mb-2">Posts</h1>
+        <a href="/panel/new" class="btn btn-success mb-2">New Post</a>
+      </div>
+      <% posts.forEach((post) => { %> 
+      <div class="card mt-5 border border-info">
+        <img class="card-img-top" src="https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510_960_720.jpg" alt="Card image cap" height="450">
+        <div class="card-body">
+          <div class="text-center">
+            <a href = "/posts/<%= post.id %> " class="card-title link-primary h3"><%= post.title %></a>
+          </div>
+          <p class="card-text"><%= post.description %> </p>
+          <p class="card-text"><small class="text-muted"><%= post.date %></small></p>
+          <div class="text-end">
+            <a href="posts/<%= post.id %>/edit" class="btn btn-info">Edit</a>
+            <a href="posts/<%= post.id %>/delete" class="btn btn-danger">Delete</a>
+          </div>
+      </div>
+    </div>
+    <% }) %> 
+    <%- include('partials/includes-bottom') %>
+  </body>
 </html>
