@@ -8,7 +8,12 @@ import {
   deletePostById,
   insertNewPost,
 } from '../models/queries';
-import { post } from '../types/post';
+import {
+  getTagsOfAllPosts,
+  getTagsOfPost,
+  embedTagsToPosts,
+} from '../helpers/getTagsOfPost';
+import { post } from '../types/types';
 
 const dummyURL =
   'https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510_960_720.jpg';
@@ -24,8 +29,10 @@ const dummyURL =
 export const getIndex = async (req: Request, res: Response) => {
   const poolResult = await pool.promise().query(findAllPosts);
   const posts = poolResult[0] as post[];
+  const tags = await getTagsOfAllPosts(posts);
+  const finalPosts = embedTagsToPosts(posts, tags);
   res.render('index', {
-    posts: posts,
+    posts: finalPosts,
   });
 };
 /**
@@ -45,7 +52,8 @@ export const getPostById = async (req: Request, res: Response) => {
   const queryResult = poolResult[0] as post[];
   if (queryResult.length) {
     const post = queryResult[0] as post;
-    res.render('post.ejs', { post });
+    const tags = await getTagsOfPost(post.id);
+    res.render('post', { post, tags });
   } else {
     res.send('Post not found');
   }

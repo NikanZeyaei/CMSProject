@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title><%= post.title %> </title>
     <%- include('partials/includes-top') %>
   </head>
   <body>
@@ -25,7 +25,14 @@
             </div>
           </p>
           <div>
-            <div class="text-start">
+            <div class="d-inline">
+              <% if (tags) { %>
+                <% tags.forEach((tag) => { %>
+                  <a href="/tags/<%= tag %> "class="btn-sm btn-secondary m1-1"><%= tag %></a>
+                <% }) %>
+              <% } %>
+            </div>
+            <div class="text-start mt-2">
               <a href="/" class="btn btn-warning">Go back</a>
             </div>
             <div class="text-end">

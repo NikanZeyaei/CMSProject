@@ -8,6 +8,7 @@
     <%- include('partials/includes-top') %>
   </head>
   <body>
+    <% let index = 0 %> 
     <div class="container">
       <div class="text-center">
         <h1 class="mb-2">Posts</h1>
@@ -32,6 +33,13 @@
               <p class="card-text mb-0"><small class="text-muted">Created at <%= Date(post.created_at).toLocaleString() %> </small></p>
               <% if (post.updated_at !== post.created_at) { %>
                 <p class="card-text mb-0"><small class="text-muted">Last updated at <%= Date(post.updated_at).toLocaleString() %> </small></p>
+              <% } %>
+            </div>
+            <div class="text-start">
+              <% if (post.tags) { %>
+                <% post.tags.forEach((tag) => { %>
+                  <a href="/tags/<%= tag %> "class="btn-sm btn-secondary m1-1"><%= tag %></a>
+                <% }) %>
               <% } %>
             </div>
             <a href="/posts/<%= post.id %>/edit" class="btn btn-info">Edit</a>

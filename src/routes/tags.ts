@@ -1,19 +1,16 @@
 import { Router } from 'express';
 import {
+  getIndex,
   getPostById,
   getEditPostById,
+  getNewPostPanel,
   editPostById,
   deletePost,
+  postNewPost,
 } from '../controllers/posts';
 
 const router = Router();
 
-router.get('/:id', getPostById);
-
-router.get('/:id/edit', getEditPostById);
-
-router.put('/:id', editPostById);
-
-router.delete('/:id', deletePost);
+router.get('/:tag', (req, res) => {});
 
 export = router;
