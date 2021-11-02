@@ -7,6 +7,7 @@ import dotenv from 'dotenv';
 import indexRouter from './routes/index';
 import panelRouter from './routes/panel';
 import postsRouter from './routes/posts';
+import tagsRouter from './routes/tags';
 
 dotenv.config();
 
@@ -32,6 +33,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.use(indexRouter);
 app.use('/panel', panelRouter);
 app.use('/posts', postsRouter);
+app.use('/tags', tagsRouter);
 
 const main = async () => {
   await mongoose.connect(process.env.mongodb_host!);

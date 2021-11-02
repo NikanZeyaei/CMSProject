@@ -5,7 +5,7 @@ import { tagParser } from '../helpers/tagParser';
 import { post } from '../types/types';
 
 export const getIndex = async (req: Request, res: Response) => {
-  const posts = (await postModel.find({})) as post[];
+  const posts = (await postModel.find({}).sort([['created_at', -1]])) as post[];
   res.render('index', { posts });
 };
 

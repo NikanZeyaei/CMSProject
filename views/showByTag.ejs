@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CMS</title>
+    <%- include('partials/includes-top') %>
+  </head>
+  <body>
+    <% let index = 0 %> 
+    <div class="container">
+      <div class="text-center">
+        <h1 class="mb-2">Posts</h1>
+      </div>
+      <div class="text-center text-danger mt-5">
+        <% if (!posts.length) { %>
+          <h1>There exists no posts with this tag</h1>
+         <% } %>
+      </div>
+      <% posts.forEach((post) => { %> 
+      <div class="card mt-5 border border-info">
+        <img class="card-img-top" src="<%= post.image_url %> " alt="Card image cap" height="450">
+        <div class="card-body">
+          <div class="text-center">
+            <a href = "/posts/<%= post.id %> " class="card-title link-primary h3"><%= post.title %></a>
+          </div>
+          <p class="card-text mt-3"><%= post.description %> </p>
+          <p class="card-text mb-0"><small class="text-muted"><%= post.date %></small></p>
+          <div class="text-end">
+            <div>
+              <p class="card-text mb-0"><small class="text-muted">Created at <%= Date(post.created_at).toLocaleString() %> </small></p>
+              <% if (post.updated_at !== post.created_at) { %>
+                <p class="card-text mb-0"><small class="text-muted">Last updated at <%= Date(post.updated_at).toLocaleString() %> </small></p>
+              <% } %>
+            </div>
+            <div class="text-start">
+              <% if (post.tags) { %>
+                <span class="text-muted">tags: </span>
+                <% post.tags.forEach((tag) => { %>
+                  <a href="/tags/<%= tag %> "class="btn-sm btn-secondary m1-1"><%= tag %></a>
+                <% }) %>
+              <% } %>
+            </div>
+            <div class="text-start mt-2">
+                <a href="/" class="btn btn-warning">Go back</a>
+              </div>
+            <a href="/posts/<%= post.id %>/edit" class="btn btn-info">Edit</a>
+            <form action="/posts/<%= post.id %>?_method=DELETE" method="post" class="d-inline">
+              <button type="submit" class="btn btn-danger">Delete</a>
+            </form>
+          </div>
+      </div>
+    </div>
+    <% }) %> 
+    <%- include('partials/includes-bottom') %>
+  </body>
+</html>
