@@ -1,8 +1,0 @@
-{
-  "title": "This is my Second post",
-  "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae sunt sed laborum necessitatibus voluptatum amet officiis libero deleniti alias aperiam.",
-  "date": "new Date().toLocaleString()",
-  "content": "content",
-  "id": "nanoid()",
-  "url": "'https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510_960_720.jpg'"
-}

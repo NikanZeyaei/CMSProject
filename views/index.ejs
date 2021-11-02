@@ -37,6 +37,7 @@
             </div>
             <div class="text-start">
               <% if (post.tags) { %>
+                <span class="text-muted">tags: </span>
                 <% post.tags.forEach((tag) => { %>
                   <a href="/tags/<%= tag %> "class="btn-sm btn-secondary m1-1"><%= tag %></a>
                 <% }) %>
