@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import postModel from '../models/post';
 import { isValidObjectId } from 'mongoose';
+import { tagParser } from '../helpers/tagParser';
 import { post } from '../types/types';
 
 export const getIndex = async (req: Request, res: Response) => {
@@ -71,13 +72,16 @@ export const postNewPost = async (req: Request, res: Response) => {
     title,
     description,
     content,
-  }: { title: string; description: string; content: string } = req.body;
+    tags,
+  }: { title: string; description: string; content: string; tags: string } =
+    req.body;
 
+  const tagsList = tagParser(tags);
   const post = await postModel.create({
     title: title,
     description: description,
     content: content,
-    tags: ['test'],
+    tags: tagsList,
     image_url: 'http://localhost:3000/img/notfound.png',
     created_at: Date.now(),
     updated_at: Date.now(),

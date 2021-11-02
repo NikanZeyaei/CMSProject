@@ -27,8 +27,8 @@
           <div>
             <div class="d-inline">
               <% if (post.tags) { %>
+                <span class="text-muted">tags: </span>
                 <% post.tags.forEach((tag) => { %>
-                  <span class="text-muted">tags: </span>
                   <a href="/tags/<%= tag %> "class="btn-sm btn-secondary m1-1"><%= tag %></a>
                 <% }) %>
               <% } %>
