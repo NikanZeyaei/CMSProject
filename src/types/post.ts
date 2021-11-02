@@ -1,8 +1,9 @@
 export interface post {
+  id?: number;
   title: string;
   description: string;
-  date: string;
   content: string;
-  id: string;
-  url: string;
+  image_url: string;
+  created_at: Date;
+  updated_at: Date;
 }

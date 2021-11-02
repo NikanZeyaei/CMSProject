@@ -20,7 +20,7 @@
       </div>
       <% posts.forEach((post) => { %> 
       <div class="card mt-5 border border-info">
-        <img class="card-img-top" src="<%= post.url %> " alt="Card image cap" height="450">
+        <img class="card-img-top" src="<%= post.image_url %> " alt="Card image cap" height="450">
         <div class="card-body">
           <div class="text-center">
             <a href = "/posts/<%= post.id %> " class="card-title link-primary h3"><%= post.title %></a>
