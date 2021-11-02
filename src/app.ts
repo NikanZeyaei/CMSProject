@@ -3,7 +3,6 @@ import session from 'express-session';
 import postsRouter from './routes/posts';
 import path from 'path';
 import methodOverride from 'method-override';
-import { post } from './types/post';
 
 const app = express();
 

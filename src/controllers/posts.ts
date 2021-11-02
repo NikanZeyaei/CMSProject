@@ -129,6 +129,14 @@ export const deletePost = async (req: Request, res: Response) => {
   res.send('Post not found (for delete)');
 };
 
+/**
+ *
+ * This controller is for the /posts/new POST request.
+ * It extracts the title,description and content from the body and sends is to the database and redirects the user to the new post's page
+ *
+ * @param  {Request} req
+ * @param  {Response} res
+ */
 export const postNewPost = async (req: Request, res: Response) => {
   const {
     title,
@@ -147,4 +155,16 @@ export const postNewPost = async (req: Request, res: Response) => {
     ])) as unknown as [ResultSetHeader];
   const id = queryResult[0].insertId;
   res.redirect(`/posts/${id}`);
+};
+
+/**
+ *
+ * Renders the new post form.
+ * /posts/new GET
+ *
+ * @param  {Request} req
+ * @param  {Response} res
+ */
+export const getNewPostPanel = (req: Request, res: Response) => {
+  res.render('newPost');
 };

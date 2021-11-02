@@ -3,6 +3,7 @@ import {
   getIndex,
   getPostById,
   getEditPostById,
+  getNewPostPanel,
   editPostById,
   deletePost,
   postNewPost,
@@ -12,9 +13,7 @@ const router = Router();
 
 router.get('/', getIndex);
 
-router.get('/panel/new', (req, res) => {
-  res.render('newPost');
-});
+router.get('/panel/new', getNewPostPanel);
 
 router.post('/panel/new', postNewPost);
 
