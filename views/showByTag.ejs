@@ -11,28 +11,26 @@
     <div class="container">
       <div class="text-center">
         <h1 class="mb-2">Posts</h1>
-        <a href="/panel/new" class="btn btn-success mb-2 btn-lg">New Post</a>
-        <a href="/search" class="btn btn-success mb-2 btn-lg">Search</a>
-        <% if (posts.length) { %>
-          <nav>
-            <ul class="pagination justify-content-center mt-3 pagination-lg">
-              <% if (currentPage !== 1) { %>
-                <li class="page-item"><a class="page-link" href="/?page=1" >1</a></li>
-              <% } %>
-              <li class="page-item active"><a href="/?page=<%= currentPage %>" class="page-link"><%= currentPage %></a></li>
-              <% if (hasNextPage) { %>
-                <li class="page-item"><a href="/?page=<%= nextPage %>" class="page-link"><%= nextPage %> </a></li>
-              <% } %>
-              <% if (lastPage !== currentPage && nextPage !== lastPage) { %>
-                <li class="page-item"><a href="/?page=<%= lastPage %>" class="page-link"><%= lastPage %> </a></li>
-              <% } %>
-            </ul>
-          </nav>
-        <% } %>
       </div>
+      <% if (posts.length) { %>
+        <nav>
+          <ul class="pagination justify-content-center mt-3 pagination-lg">
+            <% if (currentPage !== 1) { %>
+              <li class="page-item"><a class="page-link" href="/?page=1" >1</a></li>
+            <% } %>
+            <li class="page-item active"><a href="/?page=<%= currentPage %>" class="page-link"><%= currentPage %></a></li>
+            <% if (hasNextPage) { %>
+              <li class="page-item"><a href="/?page=<%= nextPage %>" class="page-link"><%= nextPage %> </a></li>
+            <% } %>
+            <% if (lastPage !== currentPage && nextPage !== lastPage) { %>
+              <li class="page-item"><a href="/?page=<%= lastPage %>" class="page-link"><%= lastPage %> </a></li>
+            <% } %>
+          </ul>
+        </nav>
+      <% } %>
       <div class="text-center text-danger mt-5">
         <% if (!posts.length) { %>
-          <h1>There are no posts yet!</h1>
+          <h1>There exists no posts with this tag</h1>
          <% } %>
       </div>
       <% posts.forEach((post) => { %> 
@@ -59,6 +57,9 @@
                 <% }) %>
               <% } %>
             </div>
+            <div class="text-start mt-2">
+                <a href="/" class="btn btn-warning">Go back</a>
+              </div>
             <a href="/posts/<%= post.id %>/edit" class="btn btn-info">Edit</a>
             <form action="/posts/<%= post.id %>?_method=DELETE" method="post" class="d-inline">
               <button type="submit" class="btn btn-danger">Delete</a>
@@ -66,7 +67,7 @@
           </div>
       </div>
     </div>
-    <% }) %>
+    <% }) %> 
     <% if (posts.length) { %>
       <nav>
         <ul class="pagination justify-content-center mt-3 pagination-lg">

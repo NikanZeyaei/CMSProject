@@ -8,9 +8,3 @@ export interface post {
   updated_at: Date;
   tags: string[] | null;
 }
-
-export interface tag {
-  id: number;
-  title: string;
-  created_at: number;
-}

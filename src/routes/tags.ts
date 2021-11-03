@@ -1,16 +1,8 @@
 import { Router } from 'express';
-import {
-  getIndex,
-  getPostById,
-  getEditPostById,
-  getNewPostPanel,
-  editPostById,
-  deletePost,
-  postNewPost,
-} from '../controllers/posts';
+import { getPostsByTag } from '../controllers/tags';
 
 const router = Router();
 
-router.get('/:tag', (req, res) => {});
+router.get('/:tag', getPostsByTag);
 
 export = router;

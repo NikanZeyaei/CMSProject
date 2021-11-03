@@ -10,7 +10,7 @@
   <body>
     <div class="container">
       <h1 class="mb-4 text-center">New Post</h1>
-      <form action="/panel/new" method="POST">
+      <form action="/panel/new" method="POST" enctype="multipart/form-data">
         <div class="form-group mb-2">
           <div class="text-center">
             <label for="title">Title</label>
@@ -36,6 +36,17 @@
         </div>
         <div class="form-group mb-2">
           <div class="text-center">
+            <label for="image">Image</label>
+          </div>
+          <input
+            type="file"
+            name="image"
+            id="image"
+            class="form-control mt-1"
+          />
+        </div>
+        <div class="form-group mb-2">
+          <div class="text-center">
             <label for="content">Content</label>
           </div>
           <textarea
@@ -44,6 +55,12 @@
             class="form-control mt-1"
             required
           ></textarea>
+        </div>
+        <div class="form-group mb-2">
+          <div class="text-center">
+            <label for="tags">Tags (Separated by commas (,))</label>
+          </div>
+          <input type="text" name="tags" id="tags" class="form-control mt-1" />
         </div>
         <div class="text-center">
           <a href="/" class="btn btn-secondary btn-lg">Cancel</a>
