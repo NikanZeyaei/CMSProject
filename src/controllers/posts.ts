@@ -3,10 +3,27 @@ import postModel from '../models/post';
 import { isValidObjectId } from 'mongoose';
 import { tagParser } from '../helpers/tagParser';
 import { post } from '../types/types';
+import { imageURLFixer } from '../helpers/imageURLFixer';
+
+const ITEMS_PER_PAGE = 2;
 
 export const getIndex = async (req: Request, res: Response) => {
-  const posts = (await postModel.find({}).sort([['created_at', -1]])) as post[];
-  res.render('index', { posts });
+  const page = req.query.page || 1;
+  const totalPosts = await postModel.find({}).count();
+  const posts = (await postModel
+    .find({})
+    .skip((+page - 1) * ITEMS_PER_PAGE)
+    .limit(ITEMS_PER_PAGE)
+    .sort([['created_at', -1]])) as post[];
+  res.render('index', {
+    posts: posts,
+    currentPage: +page,
+    hasNextPage: ITEMS_PER_PAGE * +page < totalPosts,
+    hasPreviousPage: +page > 1,
+    nextPage: +page + 1,
+    previousPage: +page - 1,
+    lastPage: Math.ceil(totalPosts / ITEMS_PER_PAGE),
+  });
 };
 
 export const getPostById = async (req: Request, res: Response) => {
@@ -43,12 +60,15 @@ export const editPostById = async (req: Request, res: Response) => {
     title,
     description,
     content,
-  }: { title: string; description: string; content: string } = req.body;
+    tags,
+  }: { title: string; description: string; content: string; tags: string } =
+    req.body;
   if (isValidObjectId(id)) {
     await postModel.findByIdAndUpdate(id, {
       title: title,
       description: description,
       content: content,
+      tags: tagParser(tags),
       updated_at: Date.now(),
     });
     res.redirect(`/posts/${id}`);
@@ -75,14 +95,15 @@ export const postNewPost = async (req: Request, res: Response) => {
     tags,
   }: { title: string; description: string; content: string; tags: string } =
     req.body;
-
+  const image = req.file;
+  const imageUrl = image?.path;
   const tagsList = tagParser(tags);
   const post = await postModel.create({
     title: title,
     description: description,
     content: content,
     tags: tagsList,
-    image_url: 'http://localhost:3000/img/notfound.png',
+    image_url: imageURLFixer(imageUrl!),
     created_at: Date.now(),
     updated_at: Date.now(),
   });

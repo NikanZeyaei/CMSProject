@@ -8,11 +8,26 @@
     <%- include('partials/includes-top') %>
   </head>
   <body>
-    <% let index = 0 %> 
     <div class="container">
       <div class="text-center">
         <h1 class="mb-2">Posts</h1>
       </div>
+      <% if (posts.length) { %>
+        <nav>
+          <ul class="pagination justify-content-center mt-3 pagination-lg">
+            <% if (currentPage !== 1) { %>
+              <li class="page-item"><a class="page-link" href="/?page=1" >1</a></li>
+            <% } %>
+            <li class="page-item active"><a href="/?page=<%= currentPage %>" class="page-link"><%= currentPage %></a></li>
+            <% if (hasNextPage) { %>
+              <li class="page-item"><a href="/?page=<%= nextPage %>" class="page-link"><%= nextPage %> </a></li>
+            <% } %>
+            <% if (lastPage !== currentPage && nextPage !== lastPage) { %>
+              <li class="page-item"><a href="/?page=<%= lastPage %>" class="page-link"><%= lastPage %> </a></li>
+            <% } %>
+          </ul>
+        </nav>
+      <% } %>
       <div class="text-center text-danger mt-5">
         <% if (!posts.length) { %>
           <h1>There exists no posts with this tag</h1>
@@ -20,7 +35,7 @@
       </div>
       <% posts.forEach((post) => { %> 
       <div class="card mt-5 border border-info">
-        <img class="card-img-top" src="<%= post.image_url %> " alt="Card image cap" height="450">
+        <img class="card-img-top" src="/<%= post.image_url %>" alt="Card image cap" height="450">
         <div class="card-body">
           <div class="text-center">
             <a href = "/posts/<%= post.id %> " class="card-title link-primary h3"><%= post.title %></a>
@@ -53,6 +68,22 @@
       </div>
     </div>
     <% }) %> 
+    <% if (posts.length) { %>
+      <nav>
+        <ul class="pagination justify-content-center mt-3 pagination-lg">
+          <% if (currentPage !== 1) { %>
+            <li class="page-item"><a class="page-link" href="/?page=1" >1</a></li>
+          <% } %>
+          <li class="page-item active"><a href="/?page=<%= currentPage %>" class="page-link"><%= currentPage %></a></li>
+          <% if (hasNextPage) { %>
+            <li class="page-item"><a href="/?page=<%= nextPage %>" class="page-link"><%= nextPage %> </a></li>
+          <% } %>
+          <% if (lastPage !== currentPage && nextPage !== lastPage) { %>
+            <li class="page-item"><a href="/?page=<%= lastPage %>" class="page-link"><%= lastPage %> </a></li>
+          <% } %>
+        </ul>
+      </nav>
+    <% } %>
     <%- include('partials/includes-bottom') %>
   </body>
 </html>

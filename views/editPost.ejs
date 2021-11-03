@@ -54,6 +54,18 @@
           <a href="/" class="btn btn-secondary btn-lg">Cancel</a>
           <button type="submit" class="btn btn-primary btn-lg">Submit</button>
         </div>
+        <div class="form-group mb-2">
+          <div class="text-center">
+            <label for="tags">Tags (Separated by commas (,))</label>
+          </div>
+          <input
+            type="text"
+            name="tags"
+            id="tags"
+            class="form-control mt-1"
+            value="<%= post.tags.join(',') %> "
+          />
+        </div>
       </form>
     </div>
     <%- include('partials/includes-bottom') %>
