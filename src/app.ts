@@ -21,25 +21,25 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(
-  session({
-    secret: process.env.session_secret!,
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-      httpOnly: true,
-    },
-  }),
+	session({
+		secret: process.env.session_secret!,
+		resave: false,
+		saveUninitialized: true,
+		cookie: {
+			httpOnly: true,
+		},
+	})
 );
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, '../public')));
 app.use('/posts', express.static(path.join(__dirname, 'posts')));
 const fileStorage = multer.diskStorage({
-  destination: (req, res, callback) => {
-    callback(null, 'public/posts/uploads');
-  },
-  filename: (req, file, callback) => {
-    callback(null, `${file.filename}-${file.originalname}`);
-  },
+	destination: (req, res, callback) => {
+		callback(null, 'public/posts/uploads');
+	},
+	filename: (req, file, callback) => {
+		callback(null, `${file.fieldname}-${Date.now()}-${file.originalname}`);
+	},
 });
 app.use(multer({ storage: fileStorage }).single('image'));
 
@@ -50,10 +50,10 @@ app.use('/tags', tagsRouter);
 app.use('/search', searchRouter);
 
 const main = async () => {
-  await mongoose.connect(process.env.mongodb_host!);
-  app.listen(3000, () => {
-    console.log('Running on port 3000');
-  });
+	await mongoose.connect(process.env.mongodb_host!);
+	app.listen(3000, () => {
+		console.log('Running on port 3000');
+	});
 };
 
 main();
